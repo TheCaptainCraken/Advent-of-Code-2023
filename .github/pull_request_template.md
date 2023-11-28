@@ -1,6 +1,6 @@
 # Day < n > in < language >
 
->**OPTIONAL**: give a brief description of how you solved this problem. What where the most interesting and/or difficult parts of this day? How much time did it take?
+>**OPTIONAL**: give a brief description of how you solved this problem. What were the most interesting and/or difficult parts for this day? How much time did it take?
 
 ## This PR solves
 
