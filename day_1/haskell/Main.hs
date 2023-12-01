@@ -12,4 +12,3 @@ main = do
 
     putStrLn "Solution to the second part:"
     putStrLn $ SecondSolution.solve input
-
