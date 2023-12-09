@@ -1,11 +1,11 @@
 module SecondPart.Solution where
 
-import Data.List(sort)
+import Data.List(sort, elemIndex)
 
 solve:: String -> String
 solve input = show . totalWinnings . sort . parseInput $ input
 
-data Card = Two | Three | Four | Five | Six | Seven | Eight | Nine | T | Q | K | A | J
+data Card = J | Two | Three | Four | Five | Six | Seven | Eight | Nine | T | Q | K | A
     deriving (Eq, Show, Ord, Enum, Bounded)
 
 data Hand = Hand [Card] Int
@@ -43,7 +43,7 @@ totalWinnings::[Hand] -> Int
 totalWinnings hands = foldr (\(i, (Hand _ bid)) sum -> sum + i * bid) 0 $ zip [1..] hands
 
 getHandType:: Hand -> HandType
-getHandType (Hand cards _) = findType (map (\e -> length $ filter (e==) cards ) [Two, Three , Four , Five , Six , Seven , Eight , Nine , T, Q , K , A]) where
+getHandType (Hand cards _) = findType ( sumToMax (getNumberOfJollys cards) $ map (\e -> length $ filter (e==) cards ) [Two, Three , Four , Five , Six , Seven , Eight , Nine , T, Q , K , A]) where
     findType::[Int] -> HandType
     findType occ
         | elem 5 occ = FIVE_OF_A_KIND
@@ -63,3 +63,11 @@ instance Ord Hand where
 
 lastResortCompare :: Hand -> Hand -> Ordering
 lastResortCompare (Hand hand1 b1) (Hand hand2 b2) = let res = compare hand1 hand2 in if res /= EQ then res else lastResortCompare (Hand (tail hand1) b1) (Hand (tail hand2) b2)
+
+getNumberOfJollys::[Card] -> Int
+getNumberOfJollys cards = length . filter (==J) $ cards
+
+sumToMax :: Int -> [Int] -> [Int]
+sumToMax quantity numbers = case elemIndex (maximum numbers) numbers of
+  Just idx -> map (\(i, e) -> if i == idx then e + quantity else e) (zip [0..] numbers)
+  Nothing -> numbers
