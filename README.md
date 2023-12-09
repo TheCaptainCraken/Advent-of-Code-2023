@@ -1,6 +1,7 @@
 # Advent of Code 2023
 
->This repo will contain solutions for [ Advent of Code 2023](https://adventofcode.com/). If you want to join me simply continue reading. :rocket:
+> This repo will contain solutions for [ Advent of Code 2023](https://adventofcode.com/). If you want to join me simply continue reading. :rocket:
+> This repo is incomplete
 
 ## How to contribute
 
